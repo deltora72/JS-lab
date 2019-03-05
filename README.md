@@ -1,6 +1,10 @@
 # Slot machine game
 
-This is a little slot machine game I designed last week for fun. The rules are very simple:
+This is a little slot machine game I designed last week for fun.
+
+Here is the link for playing online: https://deltora72.github.io/JS-lab/
+
+The rules of the game are very simple:
 
     1) You need some coins for playing the game, otherwise the machine will show you an error.
 
