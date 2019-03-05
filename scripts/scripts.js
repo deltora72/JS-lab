@@ -300,6 +300,7 @@ var app = new Vue({
         this.rIsSpinning = false;
         this.fIsSpinning = false;
         this.payout();
+        console.log(this.curPosition);
       }
     },
     payout: function () {
