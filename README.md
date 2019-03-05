@@ -2,6 +2,8 @@
 
 This is a little slot machine game I designed last week for fun.
 
+It's not yet optimized for playing in mobile devices or tablets, so please try it on your laptop or desktop computer.
+
 Here is the link for playing online: https://deltora72.github.io/JS-lab/
 
 The rules of the game are very simple:
