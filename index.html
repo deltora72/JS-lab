@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript FunLand!</title>
+    <!-- stylesheets -->
+    <link href="styles/roboto.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/vuetify.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <!-- scripts -->
+    <script src="scripts/vue.js"></script>
+    <script src="scripts/vuetify.js"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  </head>
+  <body>
+    <v-app id="app">
+      <v-container>
+        <v-layout row wrap>
+          <v-flex xs12 sm12 md12 pb-3>
+            <v-toolbar color="#f44336" dark>
+              <v-toolbar-side-icon></v-toolbar-side-icon>
+              <v-toolbar-title>Spin the reels and win great prizes!</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items class="hidden-sm-and-down">
+                <v-btn flat>My account</v-btn>
+                <v-btn flat>Rules</v-btn>
+                <v-btn flat>Help</v-btn>
+              </v-toolbar-items>
+            </v-toolbar>
+          </v-flex>
+          <v-flex xs12 sm6 md7>
+            <div id="reel1" class="reel">
+              <img v-for="pic in pics" :src="pic.src" :class="pic.id" alt="">
+              <p class="reel-line one" v-show="lineTop"></p>
+              <p class="reel-line two" v-show="lineCenter"></p>
+              <p class="reel-line three" v-show="lineBottom"></p>
+            </div>
+            <div id="reel2" class="reel">
+              <img v-for="pic in pics" :src="pic.src" :class="pic.id" alt="">
+              <p class="reel-line one" v-show="lineTop"></p>
+              <p class="reel-line two" v-show="lineCenter"></p>
+              <p class="reel-line three" v-show="lineBottom"></p>
+            </div>
+            <div id="reel3" class="reel">
+              <img v-for="pic in pics" :src="pic.src" :class="pic.id" alt="">
+              <p class="reel-line one" v-show="lineTop"></p>
+              <p class="reel-line two" v-show="lineCenter"></p>
+              <p class="reel-line three" v-show="lineBottom"></p>
+            </div>
+            <v-flex xs12 sm12 md12>
+              <p class="wins-area">Total wins :<span>{{ playerWins }}</span></p>
+              <p class="wins-area">This round win :<span>{{ newWin }}</span></p>
+            </v-flex>
+          </v-flex>
+          <v-flex xs12 sm6 md5>
+            <v-data-table :items="payouts" class="elevation-1 payouts" :headers="payoutsHeaders" hide-actions>
+              <template v-slot:items="props">
+                <td>{{ props.item.combination }}</td>
+                <td class="text-xs-right">{{ props.item.prize }}</td>
+              </template>
+            </v-data-table>
+          </v-flex>
+        </v-layout>
+        <v-layout row wrap>
+          <v-flex xs12 sm6 md7>
+            <h2>Play mode :</h2>
+            <v-radio-group v-model="gameMode" @change="ModeSelector()">
+              <v-radio label="Random" :value="rmode" color="#f44336"></v-radio>
+              <v-radio label="Fixed" :value="fmode" color="#f44336"></v-radio>
+            </v-radio-group>
+            <div id="random-container" v-show="randVis">
+              <v-btn color="success" @click="randomSpin()" :disabled="rIsSpinning">Random spin!</v-btn>
+              <v-btn color="success" @click="resetReels()" :disabled="rIsSpinning">Reset reels</v-btn>
+            </div>
+            <v-layout row wrap v-show="fixVis">
+              <v-flex xs12 sm6 md4>
+                <h4 class="pb-2">Reel one settings : </h4>
+                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" v-model="cS1"></v-select>
+                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" v-model="cL1"></v-select>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <h4 class="pb-2">Reel two settings : </h4>
+                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" v-model="cS2"></v-select>
+                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" v-model="cL2"></v-select>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <h4 class="pb-2">Reel three settings : </h4>
+                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" v-model="cS3"></v-select>
+                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" v-model="cL3"></v-select>
+              </v-flex>
+              <v-flex xs12 sm12 md12>
+                <v-btn color="success" @click="fixedSpin()" :disabled="fIsSpinning">Fixed spin!</v-btn>
+                <v-btn color="success" @click="resetReels()" :disabled="fIsSpinning">Reset reels</v-btn>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex xs12 sm6 md5  class="balance-area">
+            <v-layout row wrap>
+              <v-flex xs12 sm12 md12 class="pa-2 mb-2">
+                <h2>Here you can icrease your balance</h2>
+              </v-flex>
+              <v-flex xs12 sm7 md8 class="pa-2 add-balance">
+                <h3>Current balance :</h3>
+                <v-text-field append-outer-icon="done_all" @click:append-outer="addBalance" label="Enter balance..." v-model="coins" type="number" :rules="[v => v <= 5000 || 'Please enter a number between 1 and 5000']" @keyup.enter="addBalance" clearable color="#333" solo></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm5 md4 align-self-center class="pa-2">
+                <p class="balance-amuont">{{ curBalance }}</p>
+              </v-flex>
+              <v-dialog persistent v-model="balanceAlert" width="500">
+                <v-card>
+                  <v-card-title class="headline grey lighten-2" primary-title>Oops!</v-card-title>
+                  <v-card-text>
+                    It seems you've ran out of balance! To continue the game, please insert more coins!
+                  </v-card-text>
+                  <v-divider></v-divider>
+                  <v-card-actions>
+                    <v-btn color="#f44336" dark block @click="balanceAlert = false">Sure, let me get some coins...</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-layout>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-app>
+
+      <!-- scripts -->
+      <script type="text/javascript" src="scripts/positions.js"></script>
+      <script type="text/javascript" src="scripts/scripts.js"></script>
+  </body>
+</html>
