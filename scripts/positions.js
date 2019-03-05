@@ -507,5 +507,41 @@ let positions = {
     det: [
       { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "bottom" }
     ]
-  }
+  },
+  83: {
+    pos: "197",
+    det: [
+      { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "top" }
+    ]
+  },
+  84: {
+    pos: "179",
+    det: [
+      { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "top" }
+    ]
+  },
+  85: {
+    pos: "791",
+    det: [
+      { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "top" }
+    ]
+  },
+  86: {
+    pos: "719",
+    det: [
+      { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "top" }
+    ]
+  },
+  87: {
+    pos: "917",
+    det: [
+      { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "top" }
+    ]
+  },
+  88: {
+    pos: "971",
+    det: [
+      { text: "Combination of any 'BAR' symbols on any line", prize: 5, line: "top" }
+    ]
+  },
 }
