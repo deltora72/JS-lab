@@ -27,7 +27,7 @@ This is a little slot machine game I designed last week for fun. The rules are v
     8) By every spin, the reels will move one position ahead in the sequence. For example, if "CHERRY" is
        at the center, after one spin it will go to bottom line.
 
-    10) There is a pay-out table on the right side of the screen. Here you can find all the possible combinations
+    9) There is a pay-out table on the right side of the screen. Here you can find all the possible combinations
         of the reels which will be considered "win" and will provide you with prizes.
 
 That's it! You can now start playing and win yourself some prizes ;)
