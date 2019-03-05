@@ -281,26 +281,13 @@ var app = new Vue({
         let posOneDigit = this.spinOneCount % 10;
         let posTwoDigit = this.spinTwoCount % 10;
         let posThreeDigit = this.spinThreeCount % 10;
-
-        if (posOneDigit === 0) {
-          this.curPosition[0] = 0;
-        } else {
-          this.curPosition[0] = (this.curPosition[0] + posOneDigit) % 10;
-        }
-        if (posTwoDigit === 0) {
-          this.curPosition[1] = 0;
-        } else {
-          this.curPosition[1] = (this.curPosition[1] + posTwoDigit) % 10;
-        }
-        if (posThreeDigit === 0) {
-          this.curPosition[2] = 0;
-        } else {
-          this.curPosition[2] = (this.curPosition[2] + posThreeDigit) % 10;
-        }
+        this.curPosition[0] = (this.curPosition[0] + posOneDigit) % 10;
+        this.curPosition[1] = (this.curPosition[1] + posTwoDigit) % 10;
+        this.curPosition[2] = (this.curPosition[2] + posThreeDigit) % 10;
         this.rIsSpinning = false;
         this.fIsSpinning = false;
         this.payout();
-        console.log(this.curPosition);
+        console.log(posOneDigit, posTwoDigit, posThreeDigit, this.curPosition);
       }
     },
     payout: function () {
