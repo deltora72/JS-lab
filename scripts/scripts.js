@@ -14,7 +14,7 @@ var app = new Vue({
       {id: "pic two", src: "pics/BAR.png"},
       {id: "pic three", src: "pics/2xBAR.png"},
       {id: "pic four", src: "pics/7.png"},
-      {id: "pic five", src: "pics/cherry.png"}
+      {id: "pic five", src: "pics/Cherry.png"}
     ],
     balance: 5000,
     rIsSpinning: false,
