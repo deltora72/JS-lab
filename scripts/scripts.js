@@ -303,6 +303,7 @@ var app = new Vue({
                 payRow = document.querySelectorAll('.payouts table tbody tr')[this.payouts.indexOf(comb)];
                 payRow.style.color = "#fff";
                 payRow.style.backgroundColor = "#f44336";
+                document.getElementById('win-sound').play();
                 if (j.line === "top") {
                   this.lineTop = true;
                 } else if (j.line === "center") {
