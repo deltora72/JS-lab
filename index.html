@@ -76,18 +76,18 @@
             <v-layout row wrap v-show="fixVis">
               <v-flex xs12 sm6 md4>
                 <h4 class="pb-2">Reel one settings : </h4>
-                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" v-model="cS1"></v-select>
-                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" v-model="cL1"></v-select>
+                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" @change="fixedCheck()" v-model="cS1"></v-select>
+                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" @change="fixedCheck()" v-model="cL1"></v-select>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <h4 class="pb-2">Reel two settings : </h4>
-                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" v-model="cS2"></v-select>
-                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" v-model="cL2"></v-select>
+                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" @change="fixedCheck()" v-model="cS2"></v-select>
+                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" @change="fixedCheck()" v-model="cL2"></v-select>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <h4 class="pb-2">Reel three settings : </h4>
-                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" v-model="cS3"></v-select>
-                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" v-model="cL3"></v-select>
+                <v-select :items="symbolList" label="Symbol" solo :rules="[v => !!v || 'Item is required']" @change="fixedCheck()" v-model="cS3"></v-select>
+                <v-select :items="symbolLanding" label="Landing position" solo :rules="[v => !!v || 'Item is required']" @change="fixedCheck()" v-model="cL3"></v-select>
               </v-flex>
               <v-flex xs12 sm12 md12>
                 <v-btn color="success" @click="fixedSpin()" :disabled="fIsSpinning">Fixed spin!</v-btn>
@@ -109,13 +109,11 @@
               </v-flex>
               <v-dialog persistent v-model="balanceAlert" width="500">
                 <v-card>
-                  <v-card-title class="headline grey lighten-2" primary-title>Oops!</v-card-title>
-                  <v-card-text>
-                    It seems you've ran out of balance! To continue the game, please insert more coins!
-                  </v-card-text>
+                  <v-card-title class="headline grey lighten-2" primary-title>{{ alertTitle }}</v-card-title>
+                  <v-card-text>{{ alertText }}</v-card-text>
                   <v-divider></v-divider>
                   <v-card-actions>
-                    <v-btn color="#f44336" dark block @click="balanceAlert = false">Sure, let me get some coins...</v-btn>
+                    <v-btn color="#f44336" dark block @click="balanceAlert = false">{{ alertButton }}</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>

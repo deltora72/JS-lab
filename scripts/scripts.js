@@ -18,7 +18,7 @@ var app = new Vue({
     ],
     balance: 5000,
     rIsSpinning: false,
-    fIsSpinning: false,
+    fIsSpinning: true,
     gameMode: 'random',
     fmode: 'fixed',
     rmode: 'random',
@@ -29,6 +29,9 @@ var app = new Vue({
     curBalance: 5,
     coins: '',
     balanceAlert: false,
+    alertTitle: '',
+    alertText: '',
+    alertButton: '',
     fixVis: false,
     symbolList: ["1xBAR", "2xBAR", "3xBAR", "7", "CHERRY"],
     symbolLanding: ["Top", "Center", "Bottom"],
@@ -156,6 +159,9 @@ var app = new Vue({
         }
         this.lineTop = false; this.lineCenter = false; this.lineBottom = false;
       } else {
+        this.alertTitle = "Oops!";
+        this.alertText = "It seems you've ran out of balance! To continue the game, please insert more coins!";
+        this.alertButton = "Sure, let me get some coins...";
         this.balanceAlert = true;
       }
     },
@@ -271,9 +277,19 @@ var app = new Vue({
       }
     },
     addBalance: function () {
-      if (this.coins > 0 && this.coins <= 5000) {
+      if ((this.coins > 0 && this.coins <= 5000) && Number.isInteger(Number(this.coins))) {
         this.addCoinsError = false;
         this.curBalance = Number(this.coins);
+      } else {
+        this.alertTitle = "Wrong input!";
+        this.alertText = "Please make sure you inter an integer number between 1 and 5000.";
+        this.alertButton = "Got it";
+        this.balanceAlert = true;
+      }
+    },
+    fixedCheck: function () {
+      if (this.cS1 !== '' && this.cL1 !== '' && this.cS2 !== '' && this.cL2 !== '' && this.cS3 !== '' && this.cL3 !== '') {
+        this.fIsSpinning = false;
       }
     },
     spinFinished: function () {
