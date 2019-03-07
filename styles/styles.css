@@ -94,3 +94,27 @@
   font-size: 24px;
   color: #fff;
 }
+@media screen and (max-width: 480px) {
+  .reel {
+    width: 32.33%;
+    float: left;
+    height: 216px;
+    margin: 0px .5%;
+  }
+  .reel img {
+    padding: 10px;
+    width: 100%;
+  }
+  .v-toolbar__title {
+    font-size: 18px;
+  }
+  .wins-area {
+    padding: 10px 10px;
+    font-size: 16px;
+    width: 48%;
+  }
+  .wins-area span {
+    font-size: 16px;
+    margin: 0px 15px 0px 15px;
+  }
+}
